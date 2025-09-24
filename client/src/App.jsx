@@ -7,7 +7,7 @@ import Cart from "./pages/Cart/Cart";
 import PlaceOrder from "./pages/PlaceOrder/PlaceOrder";
 import LoginPoppup from "./components/Login/LoginPoppup";
 import { useState } from "react";
-https://github.com/Bluegriphen/food-mart.git
+
 const App = () => {
   const [showLogin, setShowLogin] = useState(false);
 
