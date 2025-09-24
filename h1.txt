@@ -1,0 +1,59 @@
+import React from "react";
+import { Navbar, Container, Form, FormControl, Button, Badge, Nav } from "react-bootstrap";
+import { FaBell, FaUser, FaSearch } from "react-icons/fa";
+
+function StudentNavbar() {
+  return (
+    <Navbar bg="white" expand="lg" className="shadow-sm border-bottom px-3 py-2">
+      <Container fluid className="d-flex justify-content-between align-items-center">
+        {/* Left Side - Title */}
+        <Navbar.Brand className="fw-semibold text-capitalize">
+          Student Dashboard
+        </Navbar.Brand>
+
+        {/* Right Side */}
+        <div className="d-flex align-items-center gap-3">
+          {/* Search Box */}
+          <Form className="position-relative">
+            <FaSearch
+              style={{
+                position: "absolute",
+                left: "10px",
+                top: "50%",
+                transform: "translateY(-50%)",
+                color: "#888",
+              }}
+            />
+            <FormControl
+              type="search"
+              placeholder="Search..."
+              className="rounded ps-4"
+              style={{ width: "200px" }}
+            />
+          </Form>
+
+          {/* Notification Bell */}
+          <div className="position-relative">
+            <Button variant="light" className="p-2 rounded-circle">
+              <FaBell />
+            </Button>
+            <Badge
+              bg="danger"
+              pill
+              className="position-absolute top-0 start-100 translate-middle"
+            >
+              3
+            </Badge>
+          </div>
+
+          {/* User Avatar */}
+          <Button variant="light" className="p-2 rounded-circle">
+            <FaUser />
+          </Button>
+        </div>
+      </Container>
+    </Navbar>
+  );
+}
+
+export default StudentNavbar;

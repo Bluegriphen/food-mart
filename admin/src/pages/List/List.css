@@ -1,0 +1,133 @@
+/* Container */
+.list {
+  width: 90%;
+  margin: 2rem auto;
+  padding: 1rem;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.list p {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #333;
+}
+
+/* Table layout */
+.list-table {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+/* Header row */
+.list-table-format.title {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr 1fr 1fr;
+  padding: 0.8rem;
+  background: #f5f5f5;
+  border-radius: 8px;
+  font-weight: bold;
+  text-align: center;
+  color: #444;
+}
+
+/* Data rows */
+.list-table-format {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr 1fr 1fr;
+  align-items: center;
+  padding: 0.8rem;
+  background: #fafafa;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+}
+
+.list-table-format:hover {
+  background: #f0f8ff;
+}
+
+/* Image */
+.list-table-format img {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 1px solid #ddd;
+  margin: auto;
+}
+
+/* Text */
+.list-table-format p {
+  margin: 0;
+  text-align: center;
+  color: #333;
+  font-size: 1rem;
+}
+
+/* Action button */
+.list-table-format button {
+  padding: 6px 12px;
+  background: #ff4d4d;
+  border: none;
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.list-table-format button:hover {
+  background: #e60000;
+}
+
+/* ============================= */
+/* Responsive Styles (Media Query) */
+/* ============================= */
+
+/* Tablets */
+@media (max-width: 768px) {
+  .list-table-format.title,
+  .list-table-format {
+    grid-template-columns: 1fr 2fr 1fr 1fr;
+  }
+
+  /* Hide image column on small screens */
+  .list-table-format.title b:first-child,
+  .list-table-format img {
+    display: none;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .list {
+    padding: 0.5rem;
+  }
+
+  .list p {
+    font-size: 1.2rem;
+  }
+
+  .list-table-format.title,
+  .list-table-format {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    text-align: left;
+  }
+
+  /* Hide category column */
+  .list-table-format.title b:nth-child(3),
+  .list-table-format p:nth-child(3) {
+    display: none;
+  }
+
+  /* Make button full width */
+  .list-table-format button {
+    width: 100%;
+    padding: 8px;
+  }
+}
