@@ -4,10 +4,9 @@ import { connectDB } from "./config/db.js";
 import foodRouter from "./routes/foodRoute.js";
 import path from "path";
 import userRouter from "./routes/userRoute.js";
-import "dotenv/config.js";
+import "dotenv/config.js"; 
 
-// Load environment variables
-dotenv.config();
+
 
 const app = express();
 const port = process.env.PORT || 4000;
