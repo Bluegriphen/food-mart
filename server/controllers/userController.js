@@ -4,11 +4,13 @@ import bcrypt from "bcrypt";
 import validator from "validator";
 
 // create token
+
 const createToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET || "default_secret", {
     expiresIn: "7d",
   });
 };
+
 
 // login user
 const loginUser = async (req, res) => {
