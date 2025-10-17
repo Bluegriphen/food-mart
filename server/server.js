@@ -2,11 +2,12 @@ import express from "express";
 import cors from "cors";
 import { connectDB } from "./config/db.js";
 import foodRouter from "./routes/foodRoute.js";
-import path from "path";
 import userRouter from "./routes/userRoute.js";
-import "dotenv/config";
 import cartRouter from "./routes/cartRoute.js";
+import orderRouter from "./routes/orderRoute.js"; // Added order router
 import ChatbotRoutes from "./routes/chatbot.routes.js";
+import path from "path";
+import "dotenv/config.js";
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -23,6 +24,7 @@ app.use("/images", express.static(path.join(__dirname, "uploads")));
 app.use("/api/food", foodRouter);
 app.use("/api/user", userRouter);
 app.use("/api/cart", cartRouter);
+app.use("/api/order", orderRouter); // Order routes added
 app.use("/api/bot/v1", ChatbotRoutes);
 
 app.get("/", (req, res) => {
