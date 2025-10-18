@@ -4,6 +4,7 @@ import userModel from "../models/userModel.js";
 const addToCart = async (req, res) => {
   try {
     res.json({ success: true, message: "Add to cart endpoint working" });
+  
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
   }
@@ -13,6 +14,7 @@ const addToCart = async (req, res) => {
 const removeFromCart = async (req, res) => {
   try {
     res.json({ success: true, message: "Remove from cart endpoint working" });
+    console.lo;
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
   }
