@@ -1,4 +1,8 @@
 import { createContext, useEffect, useState } from "react";
+<<<<<<< HEAD
+=======
+// Removed import { food_list } since you are fetching food list dynamically
+>>>>>>> b32db616d3f493326a8a499345dbaaf94957efd1
 import axios from "axios";
 
 export const StoreContext = createContext(null);
@@ -10,15 +14,19 @@ const StoreContextProvider = (props) => {
   const [fetchedFoodList, setFoodList] = useState([]);
 
   const addToCart = async (itemId) => {
+<<<<<<< HEAD
     // ... existing logic ...
     
    if (!cartItems || !cartItems[itemId]) {
+=======
+    if (!cartItems[itemId]) {
+>>>>>>> b32db616d3f493326a8a499345dbaaf94957efd1
       setCartItems((prev) => ({ ...prev, [itemId]: 1 }));
     } else {
       setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
     }
 
-    // Optional: Add logic here to call an API to sync cart with the backend
+    // Optional: sync cart with backend if token exists
     if (token) {
       await axios.post(
         url + "/api/cart/add",
@@ -29,7 +37,6 @@ const StoreContextProvider = (props) => {
   };
 
   const removeFromCart = async (itemId) => {
-    // ... existing logic ...
     setCartItems((prev) => {
       if (!prev[itemId]) return prev;
       const updatedCount = prev[itemId] - 1;
@@ -40,7 +47,6 @@ const StoreContextProvider = (props) => {
       return { ...prev, [itemId]: updatedCount };
     });
 
-    // Optional: Add logic here to call an API to sync cart with the backend
     if (token) {
       await axios.post(
         url + "/api/cart/remove",
@@ -54,10 +60,7 @@ const StoreContextProvider = (props) => {
     let totalAmount = 0;
     for (const item in cartItems) {
       if (cartItems[item] > 0) {
-        // Use the renamed state variable
         let itemInfo = fetchedFoodList.find((product) => product._id === item);
-
-        // CRITICAL FIX: Add a null check for itemInfo
         if (itemInfo) {
           totalAmount += itemInfo.price * cartItems[item];
         }
@@ -75,7 +78,6 @@ const StoreContextProvider = (props) => {
     }
   };
 
-  // NEW FUNCTION: Load cart data from the server
   const loadCartData = async (userToken) => {
     try {
       const response = await axios.post(
@@ -91,21 +93,23 @@ const StoreContextProvider = (props) => {
 
   useEffect(() => {
     async function loadData() {
-      await fetchFoodList(); // Fetch food list first
+      await fetchFoodList();
 
       const storedToken = localStorage.getItem("token");
       if (storedToken) {
         setToken(storedToken);
-        // Only load cart data if a token exists
         await loadCartData(storedToken);
       }
     }
     loadData();
-    // Removed redundant token check at the top level of useEffect
   }, []);
 
   const contextValue = {
+<<<<<<< HEAD
     food_list: fetchedFoodList, 
+=======
+    food_list: fetchedFoodList,
+>>>>>>> b32db616d3f493326a8a499345dbaaf94957efd1
     cartItems,
     setCartItems,
     addToCart,

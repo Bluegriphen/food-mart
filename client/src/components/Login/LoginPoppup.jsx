@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import "./LoginPoppup.css";
 import { GrFormClose } from "react-icons/gr";
 import { StoreContext } from "../../context/StoreContext";
+import { menu_list, food_list } from "/src/assets/assets.js";  // ✅ now works fine
 import axios from "axios";
 
 const LoginPoppup = ({ setShowLogin }) => {
