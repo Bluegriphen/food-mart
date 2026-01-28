@@ -6,12 +6,9 @@ import userRouter from "./routes/userRoute.js";
 import cartRouter from "./routes/cartRoute.js";
 import orderRouter from "./routes/orderRoute.js"; // Added order router
 import ChatbotRoutes from "./routes/chatbot.routes.js";
-<<<<<<< HEAD
 import orderRouter from "./routes/orderRoute.js";
-=======
 import path from "path";
 import "dotenv/config.js";
->>>>>>> b32db616d3f493326a8a499345dbaaf94957efd1
 
 const app = express();
 const port = process.env.PORT || 4000;
