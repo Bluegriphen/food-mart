@@ -1,28 +1,47 @@
 import jwt from "jsonwebtoken";
 
-const authMiddleware = (req, res, next) => {
-    // 1. Check for token in headers (assuming the client sends it in a custom 'token' header)
-    const { token } = req.headers; 
+<<<<<<< HEAD
+const authMiddleware = async (req, res, next) => {
+  const token = req.headers.token || req.headers.authorization; 
 
-    if (!token) {
-        // If no token is provided
-        return res.json({ success: false, message: "Not Authorized, Login Again" });
-    }
-    
-    try {
-        // 2. Verify the token using the secret key
-        const token_decode = jwt.verify(token, process.env.JWT_SECRET);
-        
-        // 3. Attach the decoded user ID to req.body for subsequent controllers
-        req.body.userId = token_decode.id;
-        
-        // 4. Continue to the next middleware or route handler
-        next();
-    } catch (error) {
-        // Handle invalid, expired, or malformed tokens
-        console.log("JWT Verification Error:", error.message);
-        res.status(401).json({ success: false, message: "Invalid Token" }); // Using 401 status is standard
-    }
-}
+  if (!token) {
+    return res.status(401).json({
+      success: false,
+      message: "Not Authorized. Please log in again.",
+    });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+    req.user = { id: decoded.id };
+
+    next();
+  } catch (error) {
+    console.error("JWT Error:", error.message);
+    res
+      .status(401)
+      .json({ success: false, message: "Invalid or expired token." });
+  }
+};
 
 export default authMiddleware;
+=======
+export const authMiddleware = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    return res.status(401).json({ success: false, message: "No token provided" });
+  }
+
+  const token = authHeader.split(" ")[1];
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = { id: decoded.id };
+    next();
+  } catch (error) {
+    console.error("Auth error:", error);
+    res.status(401).json({ success: false, message: "Invalid token" });
+  }
+};
+>>>>>>> b32db616d3f493326a8a499345dbaaf94957efd1

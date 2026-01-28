@@ -58,7 +58,7 @@ const List = ({ url }) => {
             <img src={`${url}/images/` + item.image} alt={item.name} />
             <p>{item.name}</p>
             <p>{item.category}</p>
-            <p>₹{item.price}</p>
+            <p>${item.price}</p>
             <button onClick={() => handleDelete(item._id)}>Delete</button>
           </div>
         ))}
