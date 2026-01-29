@@ -1,0 +1,288 @@
+/* MyOrder.css */
+
+.my-order-container {
+  /* No specific styles here, it acts as a wrapper for max width */
+}
+
+.order-title {
+  display: flex;
+  align-items: center;
+  font-size: 1.875rem; /* 3xl */
+  font-weight: 700; /* bold */
+  color: #111827; /* gray-900 */
+  margin-bottom: 2rem; /* mb-8 */
+}
+
+.order-icon {
+  width: 1.5rem; /* w-6 */
+  height: 1.5rem; /* h-6 */
+  margin-right: 0.75rem; /* mr-3 */
+  color: tomato; /* indigo-600 */
+}
+
+/* --- Loading State --- */
+.order-loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 24rem; /* h-96 */
+}
+
+.order-spinner {
+  animation: spin 1s linear infinite;
+  border-radius: 50%;
+  height: 3rem; /* h-12 */
+  width: 3rem; /* w-12 */
+  border-bottom-width: 2px; /* border-b-2 */
+  border-color: tomato; /* indigo-500 */
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.order-loading-text {
+  margin-left: 1rem; /* ml-4 */
+  color: #4b5563; /* gray-600 */
+}
+
+/* --- Empty State --- */
+.order-empty-container {
+  text-align: center;
+  padding: 3rem; /* p-12 */
+  background-color: white;
+  border-radius: 0.75rem; /* rounded-xl */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08); /* shadow-lg */
+}
+
+.order-empty-title {
+  font-size: 1.25rem; /* xl */
+  color: #4b5563; /* gray-600 */
+}
+
+.order-empty-subtitle {
+  font-size: 0.875rem; /* sm */
+  color: #9ca3af; /* gray-400 */
+  margin-top: 0.5rem; /* mt-2 */
+}
+
+/* --- Order List --- */
+.order-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* space-y-6 */
+}
+
+.order-card {
+  background-color: white;
+  padding: 1.25rem 1.75rem; /* p-5 sm:p-7 */
+  border-radius: 0.75rem; /* rounded-xl */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* shadow-lg */
+  border-top: 4px solid tomato; /* border-t-4 border-indigo-500 */
+  transition: all 0.3s ease;
+}
+
+.order-card:hover {
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05); /* hover:shadow-xl */
+}
+
+/* --- Order Card Header --- */
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem; /* mb-4 */
+  border-bottom: 1px solid #e5e7eb; /* border-b */
+  padding-bottom: 0.75rem; /* pb-3 */
+}
+
+.order-id {
+  font-size: 0.75rem; /* xs */
+  font-family: monospace;
+  color: #9ca3af; /* gray-400 */
+}
+
+.payment-status-paid {
+  display: flex;
+  align-items: center;
+  color: #059669; /* green-600 */
+  font-size: 0.875rem; /* sm */
+  font-weight: 500; /* medium */
+}
+
+.payment-status-pending {
+  color: #dc2626; /* red-600 */
+  font-size: 0.875rem; /* sm */
+  font-weight: 500; /* medium */
+}
+
+.payment-icon {
+  width: 1rem; /* w-4 */
+  height: 1rem; /* h-4 */
+  margin-right: 0.25rem; /* mr-1 */
+}
+
+/* --- Order Details --- */
+.order-details-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem; /* gap-4 */
+  font-size: 0.875rem; /* sm */
+}
+
+@media (min-width: 768px) {
+  .order-details-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.order-detail-group {
+  grid-column: span 2 / span 2; /* col-span-2 */
+}
+
+.order-detail-title {
+  font-weight: 600; /* semibold */
+  color: #374151; /* gray-700 */
+  margin-bottom: 0.25rem; /* mb-1 */
+}
+
+.order-detail-items {
+  color: #6b7280; /* gray-500 */
+}
+
+.order-item-detail {
+  display: block;
+}
+
+.order-item-quantity {
+  font-family: monospace;
+  font-size: 0.75rem; /* xs */
+}
+
+.order-total-amount {
+  font-size: 1.25rem; /* xl */
+  font-weight: 800; /* extrabold */
+  color: #4f46e5; /* indigo-600 */
+}
+
+.order-address-title {
+  display: flex;
+  align-items: center;
+}
+
+.address-icon {
+  width: 1rem; /* w-4 */
+  height: 1rem; /* h-4 */
+  margin-right: 0.25rem; /* mr-1 */
+}
+
+.order-address-line {
+  color: #6b7280; /* gray-500 */
+}
+
+.order-address-zip {
+  font-size: 0.75rem; /* xs */
+  margin-top: 0.25rem; /* mt-1 */
+}
+
+/* --- Order Footer --- */
+.order-footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 1.5rem; /* mt-6 */
+  padding-top: 1rem; /* pt-4 */
+  border-top: 1px solid #f3f4f6; /* border-t border-gray-100 */
+}
+
+@media (min-width: 640px) {
+  .order-footer {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.order-status-group {
+  font-weight: 600; /* semibold */
+  color: #374151; /* gray-700 */
+  margin-bottom: 0.75rem; /* mb-3 */
+}
+
+@media (min-width: 640px) {
+  .order-status-group {
+    margin-bottom: 0; /* sm:mb-0 */
+  }
+}
+
+/* --- Status Badges (Dynamic Classes) --- */
+.status-badge {
+  padding: 0.25rem 0.75rem; /* px-3 py-1 */
+  font-size: 0.875rem; /* text-sm */
+  font-weight: 600; /* font-semibold */
+  border-radius: 9999px; /* rounded-full */
+  white-space: nowrap; /* Prevent wrapping */
+}
+
+.status-default {
+  color: #4b5563; /* text-gray-600 */
+  background-color: #f3f4f6; /* bg-gray-100 */
+}
+
+.status-Placed {
+  color: tomato; /* text-blue-700 */
+  background-color: #dbeafe; /* bg-blue-100 */
+}
+
+.status-Processing {
+  color: #b45309; /* text-yellow-700 */
+  background-color: #fef3c7; /* bg-yellow-100 */
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .5; }
+}
+
+.status-Out-for-Delivery {
+  color: #7c3aed; /* text-purple-700 */
+  background-color: #ede9fe; /* bg-purple-100 */
+}
+
+.status-Delivered {
+  color: #047857; /* text-green-700 */
+  background-color: #d1fae5; /* bg-green-100 */
+}
+
+.status-Cancelled {
+  color: #b91c1c; /* text-red-700 */
+  background-color: #fee2e2; /* bg-red-100 */
+}
+
+/* --- Button --- */
+.track-button {
+  background-color: tomato; /* bg-indigo-600 */
+  color: white;
+  font-weight: 500; /* medium */
+  padding: 0.5rem 1.5rem; /* py-2 px-6 */
+  border-radius: 0.5rem; /* rounded-lg */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* shadow-md */
+  transition: background-color 0.2s, box-shadow 0.2s;
+  border: none;
+  cursor: pointer;
+}
+
+.track-button:hover {
+  background-color: tomato; /* hover:bg-indigo-700 */
+}
+
+.track-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #a5b0ff, 0 0 0 4px tomato; /* focus:ring */
+}
