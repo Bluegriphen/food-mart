@@ -1,0 +1,72 @@
+
+
+.order-add {
+  width: 70%;
+  margin-left: 20px; 
+  margin-top: 50px;
+  color: #6d6d6d;
+}
+.order h3 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #333;
+  text-align:center;
+
+}
+.order-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 30px;
+}
+
+.order-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid tomato;
+  padding: 15px;
+  border-radius: 10px;
+  background: #fff;
+  gap: 15px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.order-item-food {
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+.order-item img {
+  width: 50px;
+}
+
+.order-item-name {
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.order-item-address {
+  margin-bottom: 10px;
+}
+
+.order-item select {
+  background-color: #ffe8e4;
+  border: 1px solid tomato;
+  width: max(10vw, 120px);
+  padding: 10px;
+  outline: none;
+  cursor: pointer;
+}
+
+/* Responsive Design for smaller admin screens */
+@media (max-width: 1000px) {
+  .order-item {
+    grid-template-columns: 0.5fr 2fr 1fr;
+    font-size: 12px;
+    gap: 15px;
+  }
+  .order-item select {
+    padding: 5px;
+  }
+}
