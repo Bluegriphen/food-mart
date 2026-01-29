@@ -6,7 +6,6 @@ import userRouter from "./routes/userRoute.js";
 import cartRouter from "./routes/cartRoute.js";
 import orderRouter from "./routes/orderRoute.js"; // Added order router
 import ChatbotRoutes from "./routes/chatbot.routes.js";
-import orderRouter from "./routes/orderRoute.js";
 import path from "path";
 import "dotenv/config.js";
 
