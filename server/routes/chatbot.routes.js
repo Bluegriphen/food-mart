@@ -3,7 +3,6 @@ import { Message } from "../controllers/chatbot.message.js";
 
 const router = express.Router();
 
-// POST route for sending a message to the chatbot
-router.post("/Message", Message);
+router.post("/message", Message);
 
 export default router;
