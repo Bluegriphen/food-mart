@@ -6,6 +6,7 @@ import userRouter from "./routes/userRoute.js";
 import cartRouter from "./routes/cartRoute.js";
 import orderRouter from "./routes/orderRoute.js"; // Added order router
 import ChatbotRoutes from "./routes/chatbot.routes.js";
+import staffMasterRoutes from "./routes/staffMasterRoutes.js";
 import path from "path";
 import "dotenv/config.js";
 
@@ -28,6 +29,7 @@ app.use("/api/cart", cartRouter);
 app.use("/api/order", orderRouter); // Order routes added
 app.use("/api/bot/v1", ChatbotRoutes);
 app.use("/api/order", orderRouter);
+app.use("api/staff-master", staffMasterRoutes);
 app.get("/", (req, res) => {
   res.send("API Working 🚀");
 });
