@@ -1,11 +1,16 @@
 import express from "express";
-import {createStaffType, getStaffTypes, updateStaffType, deleteStaffType } from "../controllers/staffMasterController";
+import {
+  createStaffType,
+  getStaffTypes,
+  updateStaffType,
+  deleteStaffType,
+} from "../controllers/staffMasterController.js";
 
-const router = express.Router();
+const staffMasterRouter = express.Router();
 
-rotuer.post("/", createStaffType);
-rotuer.get("/", getStaffTypes);
-router.put("/:id", updateStaffType);
-rotuer.delete("/:id", deleteStaffType);
+staffMasterRouter.post("/", createStaffType);
+staffMasterRouter.get("/", getStaffTypes);
+staffMasterRouter.put("/:id", updateStaffType);
+staffMasterRouter.delete("/:id", deleteStaffType);
 
-export default router;
+export default staffMasterRouter;
