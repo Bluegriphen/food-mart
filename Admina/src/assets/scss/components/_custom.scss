@@ -1,0 +1,172 @@
+.sidebar-section {
+  height: calc(100vh - 225px);
+  overflow: hidden;
+}
+
+.sidebar-section:hover {
+  overflow-y: overlay;
+  scrollbar-width: thin;
+  scrollbar-color: var(--vz-border-color) transparent;
+}
+
+.w-90 {
+  width: 90%;
+}
+
+.w-38 {
+  width: 38%;
+}
+
+.height-25 {
+  height: 25px;
+}
+
+.custom-input {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 0.9rem;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--vz-body-color);
+  appearance: none;
+  background-color: var(--vz-tertiary-bg);
+  opacity: 1;
+  height: 36px;
+  background-clip: padding-box;
+  border: var(--vz-border-width) solid var(--vz-input-border-custom);
+  border-radius: var(--vz-border-radius);
+  transition:
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
+}
+
+.form-select.custom-select:focus {
+  border: var(--vz-border-width) solid var(--vz-input-border-custom);
+  outline: 0;
+  box-shadow: none;
+}
+.service-product-card-edit {
+  height: calc(100vh - 550px) !important;
+  display: flex;
+  flex-direction: column;
+}
+.service-product-card {
+  height: calc(100vh - 696px);
+  display: flex;
+  flex-direction: column;
+}
+
+.service-product-card .product-list {
+  flex: 1;
+  height: calc(400px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--vz-border-color) transparent;
+}
+
+/* Optional hover style */
+.service-product-card .product-list:hover {
+  overflow-y: overlay;
+}
+
+.custom-button {
+  border-radius: 24px;
+  height: 41px;
+  min-width: 105px;
+}
+
+.pin-button {
+  background: $white;
+  color: black;
+  height: 55px;
+  font-size: 30px;
+}
+
+.pin-button:active,
+.pin-button:disabled {
+  border: transparent !important;
+}
+
+@media (max-width: 575px) {
+  .sidebar-section {
+    height: calc(100vh - 215px);
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+  .sidebar-section {
+    height: calc(100vh - 345px);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .sidebar-section {
+    height: calc(100vh - 335px);
+  }
+
+  .service-product-card {
+    height: calc(100vh - 496px);
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .sidebar-section {
+    height: calc(100vh - 300px);
+  }
+
+  .service-product-card {
+    height: calc(100vh - 596px);
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .sidebar-section {
+    height: calc(100vh - 295px);
+  }
+
+  .service-product-card {
+    height: calc(100vh - 510px);
+  }
+}
+
+@media (min-width: 1400px) {
+  .sidebar-section {
+    height: calc(100vh - 310px);
+  }
+
+  .service-product-card {
+    height: calc(100vh - 735px);
+  }
+}
+
+[data-bs-theme="dark"] {
+.card {
+  box-shadow: 0 1px 2px #aeb1b59c !important;
+}}
+.card {
+  box-shadow: 0 1px 2px #16161726 !important;
+}
+
+/* Remove any existing built-in dash */
+.nav.nav-sm .nav-link::before {
+  content: none !important;
+}
+
+/* Dash style (only shown when no icon) */
+.sub-menu-dash {
+  display: inline-block;
+  width: 14px;
+  margin-right: 8px;
+  color: #fff;
+  opacity: 0.7;
+  font-weight: 600;
+}
+
+/* Sub-menu icon style */
+.sub-menu-icon {
+  font-size: 16px;
+  width: 18px;
+  text-align: center;
+  margin-right: 8px;
+}

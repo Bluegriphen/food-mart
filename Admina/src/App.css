@@ -1,0 +1,151 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+/* FullscreenLoader.css */
+.loader-root {
+  position: fixed;
+  inset: 0;
+  /* shorthand for top/right/bottom/left */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #d52f45 0%, #b41f36 100%);
+  z-index: 9999;
+  color: white;
+  flex-direction: column;
+  gap: 18px;
+  transition: opacity 280ms ease, visibility 280ms ease;
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* tidy hidden state for fade-out */
+.loader-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* logo container to control sizes and animation */
+.loader-logo {
+  width: 180px;
+  height: 58px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  will-change: transform;
+  animation: logoPulse 1.6s ease-in-out infinite;
+}
+
+/* subtle emphasis — scale + rotate small */
+@keyframes logoPulse {
+  0% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.06) rotate(-1.6deg);
+    opacity: 0.99;
+  }
+
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+/* small shimmer bar sliding under logo */
+.loader-shimmer {
+  width: 260px;
+  height: 8px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.02) inset;
+}
+
+.loader-shimmer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -40%;
+  height: 100%;
+  width: 40%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
+  transform: skewX(-20deg);
+  animation: shimmerMove 1.4s linear infinite;
+}
+
+@keyframes shimmerMove {
+  0% {
+    left: -40%;
+  }
+
+  100% {
+    left: 120%;
+  }
+}
+
+/* loading text */
+.loader-text {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  font-size: 13.5px;
+  letter-spacing: 0.02em;
+  opacity: 0.98;
+  transform: translateY(0);
+  animation: textFloat 1.6s ease-in-out infinite;
+  text-align: center;
+}
+
+@keyframes textFloat {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(4px);
+    opacity: 0.92;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 0.98;
+  }
+}
+
+/* responsive tweaks */
+@media (max-width: 540px) {
+  .loader-logo {
+    width: 140px;
+    height: 44px;
+  }
+
+  .loader-shimmer {
+    width: 200px;
+  }
+
+  .loader-text {
+    font-size: 13px;
+  }
+}
+
+/* dark-mode friendly (optional) */
+body.dark .loader-root {
+  background: linear-gradient(180deg, #a92a3b 0%, #821929 100%);
+}
