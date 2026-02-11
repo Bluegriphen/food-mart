@@ -1,30 +1,47 @@
-import "./Sidebar.css";
-import { assets } from "../../assets/assets.js";
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import LayoutMenuData from "./LayoutMenuData";
+import "./Sidebar.css";
 
 const Sidebar = () => {
+  const [openMenu, setOpenMenu] = useState(null);
+
+  const toggleMenu = (label) => {
+    setOpenMenu(openMenu === label ? null : label);
+  };
+
   return (
     <div className="sidebar">
-      <div className="sidebar-options">
-        <NavLink to="/add" className="sidebar-option">
-          <img src={assets.add_icon} alt="" />
-          <p>Add Items</p>
-        </NavLink>
+      {LayoutMenuData.map((item, index) => (
+        <div key={index}>
+          {item.subItems ? (
+            <>
+              <div
+                className="sidebar-option"
+                onClick={() => toggleMenu(item.label)}
+              >
+                <i className={item.icon}></i>
+                <p>{item.label}</p>
+              </div>
 
-        <NavLink to="/list" className="sidebar-option">
-          <img src={assets.order_icon} alt="" />
-          <p>List Items</p>
-        </NavLink>
-
-        <NavLink to="/orders" className="sidebar-option">
-          <img src={assets.order_icon} alt="" />
-          <p>Orders</p>
-        </NavLink>
-        <NavLink to="/" className="sidebar-option">
-          <img src={assets.order_icon} alt="" />
-          <p>Dashboard</p>
-        </NavLink>
-      </div>
+              {openMenu === item.label && (
+                <div className="submenu">
+                  {item.subItems.map((sub, i) => (
+                    <NavLink key={i} to={sub.link} className="submenu-item">
+                      {sub.label}
+                    </NavLink>
+                  ))}
+                </div>
+              )}
+            </>
+          ) : (
+            <NavLink to={item.link} className="sidebar-option">
+              <i className={item.icon}></i>
+              <p>{item.label}</p>
+            </NavLink>
+          )}
+        </div>
+      ))}
     </div>
   );
 };
