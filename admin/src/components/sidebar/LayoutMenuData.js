@@ -1,53 +1,45 @@
 const LayoutMenuData = [
   {
+    icon: "fa-solid fa-chart-pie",
     label: "Dashboard",
-    icon: "ri-dashboard-line",
-    link: "/",
+    link: "/dashboard"
   },
   {
+    icon: "fa-solid fa-pizza-slice",
     label: "Products",
-    icon: "ri-restaurant-line",
-    link: "/list",
-  },
-  {
-    label: "Add Item",
-    icon: "ri-add-circle-line",
-    link: "/add",
-  },
-  {
-    label: "Orders",
-    icon: "ri-shopping-bag-line",
-    link: "/orders",
-  },
-
-  // Staff Management Dropdown
-  {
-    label: "Staff Management",
-    icon: "ri-team-line",
     subItems: [
-      {
-        label: "Staff Master",
-        link: "/staff-types",
-      },
-      {
-        label: "Staff Members",
-        link: "/staff",
-      },
-      
-    ],
+      { label: "All Products", link: "/products" },
+      { label: "Add Product", link: "/products/add" },
+      { label: "Categories", link: "/categories" }
+    ]
   },
-
   {
-    label: "Inventory",
-    icon: "ri-store-line",
-    link: "/inventory",
+    icon: "fa-solid fa-shopping-cart",
+    label: "Orders",
+    link: "/orders"
   },
-
   {
-    label: "Reports",
-    icon: "ri-bar-chart-line",
-    link: "/reports",
+    icon: "fa-solid fa-users",
+    label: "Customers",
+    link: "/customers"
   },
+  {
+    icon: "fa-solid fa-user-tie",
+    label: "Staff",
+    subItems: [
+      { label: "All Staff", link: "/staff" },
+      { label: "Staff Types", link: "/staff/types" },
+      { label: "Add Staff", link: "/staff/add" }
+    ]
+  },
+  {
+    icon: "fa-solid fa-cog",
+    label: "Settings",
+    subItems: [
+      { label: "Profile", link: "/profile" },
+      { label: "Settings", link: "/settings" }
+    ]
+  }
 ];
 
 export default LayoutMenuData;
