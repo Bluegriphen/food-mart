@@ -1,11 +1,11 @@
-// routes/dashboardRoute.js (Corrected Version)
 import express from "express";
-import path from "path";
-import { fileURLToPath } from "url";
-import { getDashboardStats, getRevenueChartData } from "../controllers/dashboardController.js";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import { 
+  getDashboardStats, 
+  getRevenueChartData,
+  getStaffByType,
+  getStaffStatus,
+  getStaffGender
+} from "../controllers/dashboardController.js";
 
 const router = express.Router();
 
@@ -13,9 +13,9 @@ const router = express.Router();
 router.post("/stats", getDashboardStats);
 router.get("/chart", getRevenueChartData);
 
-// Admin Dashboard Page (HTML)
-router.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../views/dashboard.html"));
-});
+// Staff analytics endpoints
+router.get("/staff/distribution", getStaffByType);
+router.get("/staff/status", getStaffStatus);
+router.get("/staff/gender", getStaffGender);
 
 export default router;

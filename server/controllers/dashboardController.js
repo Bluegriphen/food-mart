@@ -1,16 +1,19 @@
-
 import foodModel from "../models/foodModel.js";
 import orderModel from "../models/orderModel.js";
 import userModel from "../models/userModel.js";
+import staffModel from "../models/staffModel.js";
+import staffMasterModel from "../models/staffMasterModel.js";
 
 // Dashboard Stats
 const getDashboardStats = async (req, res) => {
   try {
-    // Sabhi promises ko parallel me run karein (faster)
+    // Sabhi promises ko parallel me run karein
     const [
       totalProducts,
       totalOrders, 
       totalUsers,
+      totalStaff,
+      activeStaff,
       revenueData,
       recentOrders,
       statusBreakdown,
@@ -19,6 +22,8 @@ const getDashboardStats = async (req, res) => {
       foodModel.countDocuments(),
       orderModel.countDocuments(),
       userModel.countDocuments(),
+      staffModel.countDocuments(),
+      staffModel.countDocuments({ status: true }),
       orderModel.aggregate([
         { $match: { payment: true } },
         { $group: { _id: null, total: { $sum: "$amount" } } }
@@ -46,6 +51,8 @@ const getDashboardStats = async (req, res) => {
           products: totalProducts,
           orders: totalOrders,
           users: totalUsers,
+          staff: totalStaff,
+          activeStaff: activeStaff,
           revenue: totalRevenue
         },
         recentOrders,
@@ -66,7 +73,6 @@ const getDashboardStats = async (req, res) => {
 // Monthly Revenue Chart Data
 const getRevenueChartData = async (req, res) => {
   try {
-    // URL se months le sakte hain, jaise ?months=6 ya ?months=12
     const months = req.query.months ? parseInt(req.query.months) : 6;
     
     const chartData = await orderModel.aggregate([
@@ -102,4 +108,72 @@ const getRevenueChartData = async (req, res) => {
   }
 };
 
-export { getDashboardStats, getRevenueChartData };
+// Staff by Type Distribution
+const getStaffByType = async (req, res) => {
+  try {
+    const staffByType = await staffModel.aggregate([
+      { $group: { _id: "$staffType", count: { $sum: 1 } } },
+      {
+        $lookup: {
+          from: "staffmasters",
+          localField: "_id",
+          foreignField: "_id",
+          as: "typeInfo"
+        }
+      },
+      {
+        $project: {
+          typeName: { $arrayElemAt: ["$typeInfo.title", 0] },
+          count: 1
+        }
+      }
+    ]);
+    
+    res.json({ success: true, data: staffByType });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+// Staff Status Distribution
+const getStaffStatus = async (req, res) => {
+  try {
+    const statusDistribution = await staffModel.aggregate([
+      { $group: { _id: "$status", count: { $sum: 1 } } },
+      {
+        $project: {
+          status: { 
+            $cond: { if: { $eq: ["$_id", true] }, then: "Active", else: "Inactive" }
+          },
+          count: 1,
+          _id: 0
+        }
+      }
+    ]);
+    
+    res.json({ success: true, data: statusDistribution });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+// Staff Gender Distribution
+const getStaffGender = async (req, res) => {
+  try {
+    const genderData = await staffModel.aggregate([
+      { $group: { _id: "$gender", count: { $sum: 1 } } }
+    ]);
+    
+    res.json({ success: true, data: genderData });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+export { 
+  getDashboardStats, 
+  getRevenueChartData,
+  getStaffByType,
+  getStaffStatus,
+  getStaffGender
+};

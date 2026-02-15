@@ -1,0 +1,843 @@
+/* Staff List Container */
+.staff-list-container {
+  padding: 24px;
+  background: #f8fafc;
+  min-height: 100vh;
+}
+
+/* Header Section */
+.staff-header {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.staff-title {
+  font-size: 28px;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0 0 20px 0;
+}
+
+/* Search and Filter Row */
+.search-filter-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.search-field {
+  flex: 1;
+  min-width: 300px;
+}
+
+.search-field .MuiOutlinedInput-root {
+  background: #f8fafc;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.search-field .MuiOutlinedInput-root:hover {
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.search-field .MuiOutlinedInput-root.Mui-focused {
+  background: white;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+}
+
+/* Filter Button */
+.filter-btn {
+  height: 40px;
+  border-color: #e2e8f0 !important;
+  color: #1e293b !important;
+  text-transform: none !important;
+  background: white !important;
+  border-radius: 10px !important;
+  transition: all 0.3s ease !important;
+  position: relative;
+}
+
+.filter-btn:hover {
+  background: #f8fafc !important;
+  border-color: #94a3b8 !important;
+}
+
+.filter-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  min-width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  background: #3b82f6;
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+}
+
+/* Add Button */
+.add-btn {
+  height: 40px;
+  background: #e46505ff !important;
+  color: white !important;
+  text-transform: none !important;
+  border-radius: 10px !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 2px 4px rgba(228, 101, 5, 0.2) !important;
+}
+
+.add-btn:hover {
+  background: #f5741eff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(228, 101, 5, 0.3) !important;
+}
+
+/* Active Filters */
+.active-filters {
+  margin-top: 16px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filter-chip {
+  background: #f1f5f9 !important;
+  color: #1e293b !important;
+  font-size: 13px !important;
+  height: 32px !important;
+  border-radius: 16px !important;
+  transition: all 0.2s ease !important;
+}
+
+.filter-chip:hover {
+  background: #e2e8f0 !important;
+}
+
+.filter-chip .MuiChip-deleteIcon {
+  color: #64748b !important;
+  font-size: 18px !important;
+}
+
+.filter-chip .MuiChip-deleteIcon:hover {
+  color: #ef4444 !important;
+}
+
+.clear-all-chip {
+  background: transparent !important;
+  border: 1px solid #3b82f6 !important;
+  color: #3b82f6 !important;
+  font-size: 13px !important;
+  height: 32px !important;
+  border-radius: 16px !important;
+  cursor: pointer;
+  transition: all 0.2s ease !important;
+}
+
+.clear-all-chip:hover {
+  background: #eff6ff !important;
+}
+
+/* Filter Popover */
+.filter-popover {
+  width: 320px;
+  padding: 20px;
+}
+
+.filter-popover-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filter-section {
+  margin-bottom: 20px;
+}
+
+.filter-section-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filter-section-title svg {
+  color: #64748b;
+  font-size: 18px;
+}
+
+/* Radio Group */
+.filter-radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.filter-radio-label {
+  margin: 0 !important;
+}
+
+.filter-radio-label .MuiTypography-root {
+  font-size: 14px;
+  color: #1e293b;
+}
+
+.filter-radio-label .MuiRadio-root {
+  padding: 4px 8px;
+}
+
+.filter-radio-label .MuiRadio-root.Mui-checked {
+  color: #3b82f6;
+}
+
+/* Checkbox Group */
+.filter-checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 200px;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+.filter-checkbox-group::-webkit-scrollbar {
+  width: 4px;
+}
+
+.filter-checkbox-group::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 2px;
+}
+
+.filter-checkbox-group::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 2px;
+}
+
+.filter-checkbox-group::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+.filter-checkbox-label {
+  margin: 0 !important;
+}
+
+.filter-checkbox-label .MuiTypography-root {
+  font-size: 14px;
+  color: #1e293b;
+}
+
+.filter-checkbox-label .MuiCheckbox-root {
+  padding: 4px 8px;
+}
+
+.filter-checkbox-label .MuiCheckbox-root.Mui-checked {
+  color: #3b82f6;
+}
+
+/* Filter Actions */
+.filter-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.filter-clear-btn {
+  color: #64748b !important;
+  font-size: 13px !important;
+  text-transform: none !important;
+}
+
+.filter-clear-btn:hover {
+  color: #ef4444 !important;
+  background: transparent !important;
+}
+
+.filter-apply-btn {
+  background: #3b82f6 !important;
+  color: white !important;
+  font-size: 13px !important;
+  text-transform: none !important;
+  padding: 6px 16px !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+}
+
+.filter-apply-btn:hover {
+  background: #2563eb !important;
+}
+
+/* Staff Cards Grid */
+.staff-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 24px;
+}
+
+/* Staff Card */
+.staff-card {
+  background: white;
+  border-radius: 20px !important;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  overflow: visible !important;
+}
+
+.staff-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* Status Badge */
+.status-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 10;
+}
+
+.status-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.status-dot.active {
+  background: #4caf50;
+  animation: pulse 2s infinite;
+}
+
+.status-dot.inactive {
+  background: #f44336;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(76, 175, 80, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
+  }
+}
+
+/* Card Content */
+.staff-card-content {
+  padding: 24px !important;
+}
+
+/* Avatar Section */
+.avatar-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.staff-avatar {
+  width: 80px !important;
+  height: 80px !important;
+  font-size: 2rem !important;
+  font-weight: 600 !important;
+  margin-bottom: 12px !important;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.staff-card:hover .staff-avatar {
+  transform: scale(1.05);
+}
+
+.staff-name {
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+  color: #1e293b;
+  text-align: center;
+  margin: 8px 0 4px 0 !important;
+}
+
+.staff-type-chip {
+  background: #f1f5f9 !important;
+  color: #1e293b !important;
+  font-weight: 500 !important;
+  font-size: 0.75rem !important;
+  height: 24px !important;
+  border-radius: 12px !important;
+}
+
+/* Divider */
+.staff-divider {
+  margin: 16px 0 !important;
+  background: #e2e8f0 !important;
+}
+
+/* Contact Info */
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.contact-icon {
+  color: #64748b !important;
+  font-size: 18px !important;
+  min-width: 20px;
+}
+
+.contact-text {
+  color: #1e293b !important;
+  font-size: 0.9rem !important;
+  word-break: break-all;
+}
+
+.contact-text.email {
+  color: #3b82f6 !important;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.contact-text.email:hover {
+  color: #2563eb !important;
+  text-decoration: underline;
+}
+
+/* Card Actions */
+.staff-card-actions {
+  padding: 8px 16px 16px !important;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.action-btn {
+  width: 36px !important;
+  height: 36px !important;
+  background: #f8fafc !important;
+  transition: all 0.2s ease !important;
+}
+
+.action-btn.edit {
+  color: #3b82f6 !important;
+}
+
+.action-btn.edit:hover {
+  background: #eff6ff !important;
+  transform: scale(1.1);
+}
+
+.action-btn.delete {
+  color: #ef4444 !important;
+}
+
+.action-btn.delete:hover {
+  background: #fee2e2 !important;
+  transform: scale(1.1);
+}
+
+/* Loading State */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+}
+
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 3px solid #e2e8f0;
+  border-top-color: #3b82f6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.empty-state-icon {
+  font-size: 64px;
+  color: #cbd5e1;
+  margin-bottom: 16px;
+}
+
+.empty-state-title {
+  color: #1e293b;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.empty-state-text {
+  color: #64748b;
+  margin-bottom: 20px;
+}
+
+/* Footer Summary */
+.footer-summary {
+  margin-top: 24px;
+  padding: 16px;
+  background: white;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.summary-text {
+  color: #64748b;
+  font-size: 14px;
+}
+
+.stats-chips {
+  display: flex;
+  gap: 8px;
+}
+
+.stats-chip {
+  height: 28px !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+}
+
+.stats-chip.active {
+  background: #e8f5e9 !important;
+  color: #2e7d32 !important;
+}
+
+.stats-chip.inactive {
+  background: #ffebee !important;
+  color: #c62828 !important;
+}
+
+/* Delete Dialog */
+.delete-dialog .MuiDialog-paper {
+  border-radius: 16px !important;
+  padding: 8px;
+}
+
+.delete-dialog-title {
+  color: #ef4444 !important;
+  font-weight: 600 !important;
+}
+
+.delete-dialog-content {
+  padding: 20px 24px !important;
+}
+
+.delete-dialog-actions {
+  padding: 16px 24px !important;
+  gap: 12px;
+}
+
+.delete-cancel-btn {
+  color: #64748b !important;
+  text-transform: none !important;
+  border-radius: 8px !important;
+}
+
+.delete-confirm-btn {
+  background: #ef4444 !important;
+  color: white !important;
+  text-transform: none !important;
+  border-radius: 8px !important;
+  padding: 6px 16px !important;
+}
+
+.delete-confirm-btn:hover {
+  background: #dc2626 !important;
+}
+
+/* Snackbar */
+.custom-snackbar {
+  border-radius: 10px !important;
+}
+
+.custom-snackbar .MuiAlert-root {
+  border-radius: 10px !important;
+  font-size: 14px !important;
+  align-items: center;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .search-filter-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-field {
+    min-width: 100%;
+  }
+
+  .filter-btn,
+  .add-btn {
+    width: 100%;
+  }
+
+  .staff-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .staff-title {
+    font-size: 24px;
+  }
+
+  .staff-header {
+    padding: 16px;
+  }
+
+  .staff-card-content {
+    padding: 16px !important;
+  }
+
+  .staff-avatar {
+    width: 60px !important;
+    height: 60px !important;
+    font-size: 1.5rem !important;
+  }
+
+  .staff-name {
+    font-size: 1rem !important;
+  }
+
+  .contact-text {
+    font-size: 0.85rem !important;
+  }
+
+  .footer-summary {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+
+  .filter-popover {
+    width: 280px;
+    padding: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .staff-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .staff-card {
+    max-width: 100%;
+  }
+
+  .filter-popover {
+    width: 260px;
+  }
+
+  .filter-checkbox-group {
+    max-height: 150px;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .staff-header,
+  .filter-btn,
+  .add-btn,
+  .staff-card-actions,
+  .footer-summary {
+    display: none;
+  }
+
+  .staff-card {
+    break-inside: avoid;
+    box-shadow: none !important;
+    border: 1px solid #e2e8f0;
+  }
+
+  .staff-avatar {
+    box-shadow: none;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .staff-header,
+  .staff-card,
+  .empty-state,
+  .footer-summary {
+    background: #1e293b;
+  }
+
+  .staff-title,
+  .staff-name,
+  .filter-section-title,
+  .filter-radio-label .MuiTypography-root,
+  .filter-checkbox-label .MuiTypography-root {
+    color: #f1f5f9;
+  }
+
+  .search-field .MuiOutlinedInput-root {
+    background: #334155;
+    color: #f1f5f9;
+  }
+
+  .search-field .MuiOutlinedInput-root input {
+    color: #f1f5f9;
+  }
+
+  .search-field .MuiOutlinedInput-root fieldset {
+    border-color: #475569;
+  }
+
+  .filter-btn {
+    background: #334155 !important;
+    border-color: #475569 !important;
+    color: #f1f5f9 !important;
+  }
+
+  .filter-chip {
+    background: #334155 !important;
+    color: #f1f5f9 !important;
+  }
+
+  .staff-divider {
+    background: #334155 !important;
+  }
+
+  .contact-icon {
+    color: #94a3b8 !important;
+  }
+
+  .contact-text {
+    color: #e2e8f0 !important;
+  }
+
+  .action-btn {
+    background: #334155 !important;
+  }
+
+  .summary-text {
+    color: #94a3b8;
+  }
+}
+
+/* Animations */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.staff-card {
+  animation: slideIn 0.4s ease-out;
+  animation-fill-mode: both;
+}
+
+.staff-card:nth-child(odd) {
+  animation-delay: 0.1s;
+}
+
+.staff-card:nth-child(even) {
+  animation-delay: 0.2s;
+}
+
+/* Hover Card Effects */
+.staff-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #3b82f6, #e46505ff);
+  border-radius: 20px 20px 0 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.staff-card:hover::before {
+  opacity: 1;
+}
+
+/* Custom Scrollbar for Filter Popover */
+.filter-checkbox-group::-webkit-scrollbar {
+  width: 4px;
+}
+
+.filter-checkbox-group::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 2px;
+}
+
+.filter-checkbox-group::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 2px;
+}
+
+.filter-checkbox-group::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Focus States */
+.filter-radio-label .MuiRadio-root.Mui-focusVisible,
+.filter-checkbox-label .MuiCheckbox-root.Mui-focusVisible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Tooltip Customization */
+.MuiTooltip-tooltip {
+  background: #1e293b !important;
+  font-size: 12px !important;
+  padding: 6px 12px !important;
+  border-radius: 6px !important;
+}
+
+.MuiTooltip-arrow {
+  color: #1e293b !important;
+}

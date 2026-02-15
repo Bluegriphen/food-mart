@@ -1,45 +1,38 @@
 const LayoutMenuData = [
   {
-    icon: "fa-solid fa-chart-pie",
+    icon: "pie-chart",  // String identifier
     label: "Dashboard",
-    link: "/dashboard"
+    link: "/"
   },
   {
-    icon: "fa-solid fa-pizza-slice",
+    icon: "package",
     label: "Products",
     subItems: [
-      { label: "All Products", link: "/products" },
-      { label: "Add Product", link: "/products/add" },
-      { label: "Categories", link: "/categories" }
+      { label: "All Products", link: "/list" },
+      { label: "Add Product", link: "/add" },
+      
     ]
   },
   {
-    icon: "fa-solid fa-shopping-cart",
+    icon: "shopping-cart",
     label: "Orders",
     link: "/orders"
   },
-  {
-    icon: "fa-solid fa-users",
-    label: "Customers",
-    link: "/customers"
-  },
-  {
-    icon: "fa-solid fa-user-tie",
-    label: "Staff",
-    subItems: [
-      { label: "All Staff", link: "/staff" },
-      { label: "Staff Types", link: "/staff/types" },
-      { label: "Add Staff", link: "/staff/add" }
-    ]
-  },
-  {
-    icon: "fa-solid fa-cog",
-    label: "Settings",
-    subItems: [
-      { label: "Profile", link: "/profile" },
-      { label: "Settings", link: "/settings" }
-    ]
-  }
+//  {
+//    icon: "users",
+//    label: "Customers",
+//    link: "/customers"
+// },
+ {
+  
+  label: "Staff",
+  subItems: [
+    { label: "Staff Types", link: "/staff-master" },
+    { label: "Staff Members", link: "/staff" },
+  
+  ]
+},
+ 
 ];
 
 export default LayoutMenuData;
