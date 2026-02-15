@@ -4,15 +4,13 @@ import { connectDB } from "./config/db.js";
 import foodRouter from "./routes/foodRoute.js";
 import userRouter from "./routes/userRoute.js";
 import cartRouter from "./routes/cartRoute.js";
-import orderRouter from "./routes/orderRoute.js"; // Added order router
+import orderRouter from "./routes/orderRoute.js";
 import ChatbotRoutes from "./routes/chatbot.routes.js";
-import dashboardRoutes from "./routes/dashboardRoute.js";
 import path from "path";
 import "dotenv/config.js";
 
 const app = express();
 const port = process.env.PORT || 4000;
-
 
 // Middleware
 app.use(express.json());
@@ -26,11 +24,9 @@ app.use("/images", express.static(path.join(__dirname, "uploads")));
 app.use("/api/food", foodRouter);
 app.use("/api/user", userRouter);
 app.use("/api/cart", cartRouter);
-app.use("/api/order", orderRouter); // Order routes added
+app.use("/api/order", orderRouter);
 app.use("/api/bot/v1", ChatbotRoutes);
 app.use("/api/order", orderRouter);
-app.use("/api/dashboard", dashboardRoutes);
-app.use("/dashboard", dashboardRoutes); 
 app.get("/", (req, res) => {
   res.send("API Working 🚀");
 });
