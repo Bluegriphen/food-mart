@@ -1,33 +1,26 @@
-// RevenueChart.jsx - Optional enhancement
 import React from 'react';
 import { 
   AreaChart, Area, XAxis, YAxis, CartesianGrid, 
   Tooltip, Legend, ResponsiveContainer 
 } from 'recharts';
-import { FiTrendingUp, FiInfo } from 'react-icons/fi';
+import { FiTrendingUp } from 'react-icons/fi';
 
 const RevenueChart = ({ chartData, chartPeriod, onPeriodChange, formatCurrency }) => {
   const getChartData = () => {
     if (!chartData || chartData.length === 0) return [];
     
-    return chartData.map(item => {
-      if (item.label) {
-        return {
-          month: item.label,
-          revenue: item.revenue || 0,
-          orders: item.orders || 0,
-          avgOrderValue: item.avgOrderValue || 0
-        };
-      } 
-      else if (item._id) {
-        return {
-          month: `${item._id.month}/${item._id.year}`,
-          revenue: item.revenue || 0,
-          orders: item.orders || 0
-        };
-      }
-      return null;
-    }).filter(item => item !== null);
+    // Sort data by year and month to ensure correct order
+    const sortedData = [...chartData].sort((a, b) => {
+      if (a.year !== b.year) return a.year - b.year;
+      return a.month - b.month;
+    });
+    
+    return sortedData.map(item => ({
+      month: item.label || `${item.monthName} ${item.year}`,
+      revenue: item.revenue || 0,
+      orders: item.orders || 0,
+      avgOrderValue: item.avgOrderValue || 0
+    }));
   };
 
   const data = getChartData();
@@ -36,6 +29,27 @@ const RevenueChart = ({ chartData, chartPeriod, onPeriodChange, formatCurrency }
   const totalOrders = data.reduce((sum, item) => sum + item.orders, 0);
   const avgMonthlyRevenue = data.length > 0 ? totalRevenue / data.length : 0;
   const avgOrderValue = totalOrders > 0 ? totalRevenue / totalOrders : 0;
+
+  // Custom tooltip formatter
+  const CustomTooltip = ({ active, payload, label }) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="custom-tooltip">
+          <p className="tooltip-label">{label}</p>
+          <p className="tooltip-revenue">
+            Revenue: {formatCurrency(payload[0].value)}
+          </p>
+          <p className="tooltip-orders">
+            Orders: {payload[1]?.value || 0} orders
+          </p>
+          <p className="tooltip-avg">
+            Avg Order: {formatCurrency(payload[0].value / (payload[1]?.value || 1))}
+          </p>
+        </div>
+      );
+    }
+    return null;
+  };
 
   return (
     <div className="chart-card full-width">
@@ -71,7 +85,10 @@ const RevenueChart = ({ chartData, chartPeriod, onPeriodChange, formatCurrency }
       <div className="chart-container">
         {data.length > 0 ? (
           <ResponsiveContainer width="100%" height={400}>
-            <AreaChart data={data}>
+            <AreaChart 
+              data={data}
+              margin={{ top: 20, right: 30, left: 20, bottom: 30 }}
+            >
               <defs>
                 <linearGradient id="revenueGradient" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="5%" stopColor="#3498db" stopOpacity={0.8}/>
@@ -82,27 +99,40 @@ const RevenueChart = ({ chartData, chartPeriod, onPeriodChange, formatCurrency }
                   <stop offset="95%" stopColor="#2ecc71" stopOpacity={0.1}/>
                 </linearGradient>
               </defs>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="month" />
+              <CartesianGrid strokeDasharray="3 3" stroke="#e0e0e0" />
+              <XAxis 
+                dataKey="month" 
+                tick={{ fill: '#666', fontSize: 12 }}
+                axisLine={{ stroke: '#ccc' }}
+                tickLine={{ stroke: '#ccc' }}
+                interval={0}
+                angle={0}
+                textAnchor="middle"
+                height={50}
+              />
               <YAxis 
                 yAxisId="left"
-                tickFormatter={(value) => `₹${value/1000}K`} 
+                tickFormatter={(value) => `₹${(value/1000).toFixed(1)}K`}
+                tick={{ fill: '#3498db', fontSize: 12 }}
+                axisLine={{ stroke: '#3498db' }}
+                tickLine={{ stroke: '#3498db' }}
+                width={80}
               />
               <YAxis 
                 yAxisId="right"
                 orientation="right"
                 tickFormatter={(value) => value}
+                tick={{ fill: '#2ecc71', fontSize: 12 }}
+                axisLine={{ stroke: '#2ecc71' }}
+                tickLine={{ stroke: '#2ecc71' }}
+                width={60}
               />
-              <Tooltip 
-                formatter={(value, name) => {
-                  if (name === 'Revenue') return formatCurrency(value);
-                  if (name === 'Orders') return `${value} orders`;
-                  if (name === 'Avg Order Value') return formatCurrency(value);
-                  return value;
-                }}
-                labelFormatter={(label) => `Period: ${label}`}
+              <Tooltip content={<CustomTooltip />} />
+              <Legend 
+                wrapperStyle={{ paddingTop: 20 }}
+                iconType="circle"
+                iconSize={10}
               />
-              <Legend />
               <Area 
                 yAxisId="left"
                 type="monotone" 
@@ -112,6 +142,7 @@ const RevenueChart = ({ chartData, chartPeriod, onPeriodChange, formatCurrency }
                 fill="url(#revenueGradient)" 
                 name="Revenue"
                 strokeWidth={2}
+                activeDot={{ r: 8 }}
               />
               <Area 
                 yAxisId="right"
@@ -122,25 +153,25 @@ const RevenueChart = ({ chartData, chartPeriod, onPeriodChange, formatCurrency }
                 fill="url(#ordersGradient)" 
                 name="Orders"
                 strokeWidth={2}
+                activeDot={{ r: 8 }}
               />
             </AreaChart>
           </ResponsiveContainer>
         ) : (
           <div className="no-data-chart">
-            <FiInfo size={40} color="#999" />
+            <FiTrendingUp size={40} color="#999" />
             <p>No revenue data available for delivered orders</p>
             <small>Orders marked as "Delivered" will appear here</small>
-            <div className="status-example">
-              <span className="status-badge">Order Placed</span> → 
-              <span className="status-badge">Food Processing</span> → 
-              <span className="status-badge">Out for Delivery</span> → 
-              <span className="status-badge delivered">Delivered ✓</span>
-            </div>
           </div>
         )}
       </div>
 
       <div className="chart-footer">
+        <div className="chart-stats">
+          <span>📊 {data.length} months shown</span>
+          <span>📦 {totalOrders} total orders</span>
+          <span>💰 {formatCurrency(totalRevenue)} total revenue</span>
+        </div>
         <small className="text-muted">
           * Revenue is calculated based on orders marked as "Delivered" only
         </small>

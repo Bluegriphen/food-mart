@@ -30,21 +30,21 @@ const StaffAnalytics = ({ data }) => {
   return (
     <div className="staff-analytics">
       <Grid container spacing={3}>
-        {/* Staff by Type - Pie Chart */}
-        <Grid item xs={12} md={4}>
+        {/* Staff by Type - Pie Chart (Badha hua width) */}
+        <Grid item xs={12} md={6}>  {/* md={4} se badhakar md={6} kiya */}
           <Paper className="analytics-card">
-            <Typography variant="h6" className="card-title">
+            <Typography variant="h6" className="card-title" >
               Staff by Type
             </Typography>
             <div className="chart-container">
-              <ResponsiveContainer width="100%" height={250}>
-                <PieChart>
+              <ResponsiveContainer width="100%" height={300}>  {/* height bhi 250 se 300 ki */}
+                <PieChart >
                   <Pie
                     data={byType}
                     cx="50%"
                     cy="50%"
-                    innerRadius={60}
-                    outerRadius={80}
+                    innerRadius={60}  
+                    outerRadius={80}  
                     paddingAngle={5}
                     dataKey="count"
                     label={({ typeName, percent }) => 
@@ -63,7 +63,7 @@ const StaffAnalytics = ({ data }) => {
         </Grid>
 
         {/* Staff Status - Pie Chart */}
-        <Grid item xs={12} md={4}>
+        <Grid item xs={12} md={3}>  {/* md={4} se badalkar md={3} kiya */}
           <Paper className="analytics-card">
             <Typography variant="h6" className="card-title">
               Staff Status
@@ -94,7 +94,7 @@ const StaffAnalytics = ({ data }) => {
         </Grid>
 
         {/* Gender Distribution - Bar Chart */}
-        <Grid item xs={12} md={4}>
+        <Grid item xs={12} md={3}>  {/* md={4} se badalkar md={3} kiya */}
           <Paper className="analytics-card">
             <Typography variant="h6" className="card-title">
               Gender Distribution
