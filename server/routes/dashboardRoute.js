@@ -4,7 +4,8 @@ import {
   getRevenueChartData,
   getStaffByType,
   getStaffStatus,
-  getStaffGender
+  getStaffGender,
+  testRevenueData  // Add this import
 } from "../controllers/dashboardController.js";
 
 const router = express.Router();
@@ -17,5 +18,8 @@ router.get("/chart", getRevenueChartData);
 router.get("/staff/distribution", getStaffByType);
 router.get("/staff/status", getStaffStatus);
 router.get("/staff/gender", getStaffGender);
+
+// Test/Debug endpoint - Remove in production
+router.get("/test-revenue", testRevenueData);  // Add this line
 
 export default router;

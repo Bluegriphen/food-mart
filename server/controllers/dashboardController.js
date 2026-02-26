@@ -24,8 +24,8 @@ const getDashboardStats = async (req, res) => {
       userModel.countDocuments(),
       staffModel.countDocuments(),
       staffModel.countDocuments({ status: true }),
-      orderModel.aggregate([
-        { $match: { payment: true } },
+       orderModel.aggregate([
+        { $match: { status: "Delivered" } }, // Only count delivered orders
         { $group: { _id: null, total: { $sum: "$amount" } } }
       ]),
       orderModel.find({})
@@ -74,14 +74,25 @@ const getDashboardStats = async (req, res) => {
 const getRevenueChartData = async (req, res) => {
   try {
     const months = req.query.months ? parseInt(req.query.months) : 6;
+        // Create date range with proper timezone handling
+    const today = new Date();
+    const startDate = new Date(today);
+    startDate.setMonth(today.getMonth() - months);
+    startDate.setHours(0, 0, 0, 0); // Start from beginning of the day
+    
+    const endDate = new Date(today);
+    endDate.setHours(23, 59, 59, 999); // End of today
+    
+    console.log("Date range:", { startDate, endDate });
     
     const chartData = await orderModel.aggregate([
       {
         $match: {
           date: {
-            $gte: new Date(new Date().setMonth(new Date().getMonth() - months))
+             $gte: startDate,
+            $lte: endDate
           },
-          payment: true
+          status: "Delivered"  // Only count orders marked as Delivered by admin
         }
       },
       {
@@ -91,13 +102,35 @@ const getRevenueChartData = async (req, res) => {
             month: { $month: "$date" }
           },
           revenue: { $sum: "$amount" },
-          orders: { $sum: 1 }
+          orders: { $sum: 1 },
+          // Optional: Track average order value
+          avgOrderValue: { $avg: "$amount" }
         }
       },
-      { $sort: { "_id.year": 1, "_id.month": 1 } }
+      {
+        $project: {
+          _id: 0,
+          year: "$_id.year",
+          month: "$_id.month",
+          revenue: 1,
+          orders: 1,
+          avgOrderValue: { $round: ["$avgOrderValue", 2] }
+        }
+      },
+      { $sort: { year: 1, month: 1 } }
     ]);
+      console.log("Chart data found:", chartData);
+    // Format month numbers to names for better readability
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", 
+                        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     
-    res.json({ success: true, data: chartData || [] });
+    const formattedData = chartData.map(item => ({
+      ...item,
+      monthName: monthNames[item.month - 1],
+      label: `${monthNames[item.month - 1]} ${item.year}`
+    }));
+    
+    res.json({ success: true, data: formattedData || [] });
     
   } catch (error) {
     console.error("Revenue chart error:", error);
@@ -107,7 +140,6 @@ const getRevenueChartData = async (req, res) => {
     });
   }
 };
-
 // Staff by Type Distribution
 const getStaffByType = async (req, res) => {
   try {
@@ -170,10 +202,45 @@ const getStaffGender = async (req, res) => {
   }
 };
 
+
+// Add to your dashboard controller for testing
+const testRevenueData = async (req, res) => {
+  try {
+    // Get all delivered orders
+    const deliveredOrders = await orderModel.find({ status: "Delivered" });
+    
+    // Calculate total revenue manually
+    let manualTotal = 0;
+    deliveredOrders.forEach(order => {
+      manualTotal += order.amount || 0;
+    });
+    
+    // Check what your aggregate query returns
+    const aggregateResult = await orderModel.aggregate([
+      { $match: { status: "Delivered" } },
+      { $group: { _id: null, total: { $sum: "$amount" } } }
+    ]);
+    
+    res.json({
+      success: true,
+      debug: {
+        deliveredCount: deliveredOrders.length,
+        manualTotalRevenue: manualTotal,
+        aggregateResult: aggregateResult,
+        sampleOrder: deliveredOrders[0] // First order as sample
+      }
+    });
+  } catch (error) {
+    res.json({ success: false, error: error.message });
+  }
+};
+
+
 export { 
   getDashboardStats, 
   getRevenueChartData,
   getStaffByType,
   getStaffStatus,
-  getStaffGender
+  getStaffGender,
+  testRevenueData 
 };
