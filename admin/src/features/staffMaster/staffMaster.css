@@ -1,0 +1,99 @@
+/* Staff Master Custom Styles */
+
+.loader {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #e2e8f0;
+  border-top-color: #3b82f6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Hover effects for table rows */
+.MuiTableRow-root:hover {
+  background-color: #f8fafc !important;
+  transition: background-color 0.2s ease;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Animation for new items */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.MuiTableRow-root {
+  animation: slideIn 0.3s ease;
+}
+
+/* Status badges */
+.status-active {
+  background: #10b981 !important;
+  color: white !important;
+}
+
+.status-inactive {
+  background: #94a3b8 !important;
+  color: white !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .MuiContainer-root {
+    padding: 12px !important;
+  }
+  
+  .MuiTableCell-root {
+    padding: 12px 8px !important;
+  }
+  
+  .MuiAvatar-root {
+    width: 32px !important;
+    height: 32px !important;
+  }
+}
+
+/* Print styles */
+@media print {
+  .MuiButton-root,
+  .MuiIconButton-root,
+  .MuiChip-root {
+    display: none !important;
+  }
+  
+  .MuiPaper-root {
+    box-shadow: none !important;
+    border: 1px solid #e2e8f0 !important;
+  }
+}

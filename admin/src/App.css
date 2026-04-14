@@ -1,0 +1,122 @@
+/* App Container */
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* App Content Layout - YAHAN SE SOLVE HOGA */
+.app-content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  background: #f8fafc;
+  position: relative;
+}
+
+/* Sidebar - fixed position mat do, relative rakho */
+.sidebar {
+  width: 280px;
+  height: 100vh;
+  background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+  color: #fff;
+  position: fixed;  /* Change this to fixed */
+  left: 0;
+  top: 60px; /* Navbar ki height ke hisaab se */
+  bottom: 0;
+  overflow-y: auto;
+  z-index: 100;
+}
+
+/* Main Content - IMPORTANT: Sidebar ke barabar margin do */
+.main-content {
+  flex: 1;
+  margin-left: 280px;  /* Sidebar ki width ke barabar */
+  margin-top: 60px;    /* Navbar ki height ke barabar */
+  padding: 24px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: #f8fafc;
+  min-height: calc(100vh - 60px);
+  width: calc(100% - 280px);
+}
+
+/* Navbar - fixed rakho */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: white;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* Responsive Design */
+@media (max-width: 1280px) {
+  .sidebar {
+    width: 240px;
+  }
+  
+  .main-content {
+    margin-left: 240px;
+    width: calc(100% - 240px);
+  }
+}
+
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 200px;
+  }
+  
+  .main-content {
+    margin-left: 200px;
+    width: calc(100% - 200px);
+    padding: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 60px;
+  }
+  
+  .main-content {
+    margin-left: 60px;
+    width: calc(100% - 60px);
+    padding: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .sidebar {
+    width: 0;
+    display: none; /* Mobile pe sidebar hide karo */
+  }
+  
+  .main-content {
+    margin-left: 0;
+    width: 100%;
+    padding: 12px;
+  }
+}
+
+/* Scrollbar styling */
+.main-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.main-content::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+.main-content::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+.main-content::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
